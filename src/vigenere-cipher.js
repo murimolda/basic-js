@@ -32,7 +32,8 @@ class VigenereCipheringMachine {
     }
 
     let encryptMessage = '';
-    const alphbet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
     message = message.toUpperCase();
     key = key.toUpperCase();
 
@@ -42,7 +43,7 @@ class VigenereCipheringMachine {
     if (message.length > key.length) {
       let count = 0;
       for (const char of message) {
-        if (alphbet.includes(char)) {
+        if (alphabet.includes(char)) {
           count++;
         }
       }
@@ -50,9 +51,9 @@ class VigenereCipheringMachine {
     }
 
     for (let i = 0, k = 0; i < message.length; i++) {
-      if (alphbet.includes(message[i])) {
-        let index = ((message[i].codePointAt(0) - alphbet.codePointAt(0)) + (key[k].codePointAt(0) - alphbet.codePointAt(0))) % alphbet.length;
-        encryptMessage += alphbet[index];
+      if (alphabet.includes(message[i])) {
+        let index = ((message[i].codePointAt(0) - alphabet.codePointAt(0)) + (key[k].codePointAt(0) - alphabet.codePointAt(0))) % alphabet.length;
+        encryptMessage += alphabet[index];
         k++;
       } else {
         encryptMessage += message[i];
@@ -67,7 +68,7 @@ class VigenereCipheringMachine {
       throw new Error('Incorrect arguments!');
     }
     let decryptMessage = '';
-    const alphbet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     message = message.toUpperCase();
     key = key.toUpperCase();
     if (typeof (this.direct) === 'boolean') {
@@ -76,7 +77,7 @@ class VigenereCipheringMachine {
     if (message.length > key.length) {
       let count = 0;
       for (const char of message) {
-        if (alphbet.includes(char)) {
+        if (alphabet.includes(char)) {
           count++;
         }
       }
@@ -84,12 +85,12 @@ class VigenereCipheringMachine {
     }
 
     for (let i = 0, k = 0; i < message.length; i++) {
-      if (alphbet.includes(message[i])) {
-        let index = ((message[i].codePointAt(0) - alphbet.codePointAt(0)) - (key[k].codePointAt(0) - alphbet.codePointAt(0))) % alphbet.length;
+      if (alphabet.includes(message[i])) {
+        let index = ((message[i].codePointAt(0) - alphabet.codePointAt(0)) - (key[k].codePointAt(0) - alphabet.codePointAt(0))) % alphabet.length;
         if (index >= 0) {
-          decryptMessage += alphbet[index];
+          decryptMessage += alphabet[index];
         } else {
-          decryptMessage += alphbet.slice(index, index < -1 ? index + 1 : undefined);
+          decryptMessage += alphabet.slice(index, index < -1 ? index + 1 : undefined);
         }
         k++;
       } else {
